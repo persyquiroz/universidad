@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<select id="id_plan_academico" name="id_plan_acad" required="">
+	<option value="">Seleccione--</option>
+	{% for plan in list_planes_acad %}
+	<option value="{{ plan.id }}">{{ plan.numero_plan }}</option>
+	{% endfor %}
+</select>
+<script src="{% static "js/init.js" %}"></script>
+
+<script type="text/javascript">
+        $(document).ready(function() {
+           $("#id_plan_academico").change(function() {
+                var id_plan_academico = $(this).val();
+                if (id_plan_academico != '') {
+                    $("#resul_plan_acad_cursos").show("slow");
+                    $("#resul_plan_acad_cursos").load("../buscar_plan_acad_cursos/?id_plan_academico="+id_plan_academico, "", function() {
+                        $("#boton_agregar").show("slow");        
+                    });
+                } else {
+                    $("#resul_plan_acad_cursos").hide("slow");
+                    $("#boton_agregar").hide("slow");  
+                 }
+            });
+        });
+  </script>
+

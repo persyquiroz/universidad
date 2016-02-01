@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="description" content="Materialize is a modern responsive CSS framework based on Material Design by Google. ">
+        <title>Bienvenido al sistema</title>
+        {% load staticfiles %}
+        <!-- Favicons-->
+        <link rel="apple-touch-icon-precomposed" href="{% static "images/favicon/logo_upeu.png" %}">
+        <meta name="msapplication-TileColor" content="#FFFFFF">
+        <meta name="msapplication-TileImage" content="{% static "images/favicon/logo_upeu.png" %}">
+        <link rel="icon" href="{% static "images/favicon/logo_upeu.png" %}" sizes="32x32">
+        <!--  Android 5 Chrome Color-->
+        <meta name="theme-color" content="#EE6E73">
+        <!-- CSS-->
+        <link href="{% static "css/prism.css" %}" rel="stylesheet">
+        <link href="{% static "css/ghpages-materialize.css" %}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{% static "css/comun.css" %}" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script>
+            window.liveSettings = {
+                api_key: "a0b49b34b93844c38eaee15690d86413",
+                picker: "bottom-right",
+                detectlang: true,
+                dynamic: true,
+                autocollect: true
+            };
+        </script>
+    </head>
+    <body>
+    <body>
+        <header>
+            <div class="container">
+                <a href="#" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle hide-on-large-only">
+                    <i class="mdi-navigation-menu"></i></a>
+            </div>
+            <ul id="nav-mobile" class="side-nav fixed">
+                <li class="logo">
+                    <div id="logo-container" href="$" class="brand-logo">
+                        <img src="{% static "images/logo_upeu.png" %}"  id="front-page-logo"/>
+                    </div>
+                </li>
+                <li class="search">
+                    <div class="search-wrapper card">
+                        <input id="search"><i class="material-icons">search</i>
+                        <div class="search-results"></div>
+                    </div>
+                </li>
+                <!--<li class="bold"><a href="getting-started.html" class="waves-effect waves-teal">Getting Started</a></li>-->
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-teal">&bull; Admisión</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="/admision/encuestas_examen/" title="Encuestas">Encuestas</a></li>
+                                    <li><a href="/admision/lugares_examen/">Lugares de examen</a></li>
+                                    <li><a href="/admision/requisitos/">Requisitos</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-teal">&bull; Académico</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="/academico/periodos/">Periodos</a></li>
+                                     <li><a href="/academico/planes_academicos/">Planes académicos</a></li>
+                                     <li><a href="/academico/planes_academicos_cursos/">Plan. Académico: cursos</a></li>
+                                    <li><a href="/academico/alumnos_uni/">Alumnos</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                     </ul>
+                </li>
+            </ul>
+        </header> 
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>if (!window.jQuery) { document.write('<script src="bin/jquery-2.1.1.min.js"><\/script>'); }
+    </script>
+    <script src="{% static "js/jquery.timeago.min.js" %}"></script>
+    <script src="{% static "js/prism.js" %}"></script>
+    <script src="{% static "jade/lunr.min.js" %}"></script>
+    <script src="{% static "jade/search.js" %}"></script>
+    <script src="{% static "bin/materialize.js" %}"></script>
+    <script src="{% static "js/init.js" %}"></script>
+    <script src="{% static "js/arreglo_persy.js" %}"></script>
+    <script src="{% static "js_busq/seleccionador.js" %}"></script>
+    <!-- Twitter Button -->
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+    <!-- Google Plus Button-->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <!--  Google Analytics  -->
+{% block content %}
+{% endblock %}

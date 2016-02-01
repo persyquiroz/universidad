@@ -1,0 +1,68 @@
+
+{% extends "upeu/superior.html" %}
+{% block content %}
+  <main>
+        <div class="section" id="index-banner">
+          <div class="container">
+            <div class="row center">
+              <div class="col s12 m12">
+                  <font size="4"><b>Requisitos de Admisión</b></font>
+               </div>
+            </div>
+          </div>
+        </div>
+        <div class="github-commit">
+                <div class="container">
+                        <div class="commit">Lista de requisitos de admisión</b> &nbsp;&nbsp;
+
+                            <a class='dropdown-button btn-flat right grey-text text-lighten-5 waves-effect waves-light hide-on-small-only' href='#' data-activates='dropdown1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opciones &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                <ul id='dropdown1' class='dropdown-content'>
+                                <li><a href="nueva/"><i class="material-icons dp8">note_add</i> Nueva encuesta</a></li>
+                                <li><a class="modal-trigger" href="#modal1" onclick="ver_impresion()"><i class="material-icons dp48">print</i> Informe</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+
+    	<div class="row">
+          <div class="col s12">
+            <table class="bordered">
+              <thead>
+                <tr>
+                    <th data-field="id">#</th>
+                    <th data-field="name">Requisito</th>
+                    <th data-field="price">Detalle</th>
+                    <th data-field="price" colspan="2"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for req in requisitos %}
+				<tr bgcolor="#fcfcfc"  onmouseover="this.style.backgroundColor='#EAECEE';"
+                    onmouseout="this.style.backgroundColor='#fcfcfc';">
+					<td>{{ forloop.counter }}.</td>
+					<td>{{ req.nombre_requisito }}</td>
+					<td>{{ req.detalles }}</td>
+					<td align="center">
+						<a href="editar/{{ req.id }}">Editar</a>
+					</td>
+					<td align="center">
+						<a href="eliminar/{{ req.id }}">Borrar</a>
+					</td>
+				</tr>
+				{% endfor %}
+              </tbody>
+            </table>
+             <div class="progress">
+                <div class="indeterminate"></div>
+            </div>
+            <div class="chip">
+                    Registrado correctamente
+                <i class="material-icons">close</i>
+            </div>
+          </div>
+        </div>
+    </main>
+         {% endblock %}
+</body>
+</html>
+

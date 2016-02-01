@@ -1,0 +1,76 @@
+
+{% extends "upeu/superior.html" %}
+{% block content %}
+  <main>
+        <div class="section" id="index-banner">
+          <div class="container">
+            <div class="row center">
+              <div class="col s12 m12">
+                  <font size="4"><b>Reporte de doble for</b></font>
+               </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <table class="bordered">
+              <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Fecha</th>
+                    <th>Lugar examen</th>
+                    <th>Nombres y apellidos</th>
+                    <th>Tipo doc</th>
+                    <th>Número doc</th>
+                    <th>Edad</th>
+                    <th>Grado</th>
+                     <th colspan="2">{{ hola }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for lug in lugares %}
+                <tr bgcolor="white"  onmouseover="this.style.backgroundColor='#EAECEE';"
+                    onmouseout="this.style.backgroundColor='white';">
+                    <td colspan="10"><b>{{ lug.nombre_lugar }}</b></td>
+                </tr>
+
+                {% for enc in encuestados %}
+                  {% if enc.lugar_examen == lug %}
+                <tr bgcolor="white"  onmouseover="this.style.backgroundColor='#EAECEE';"
+                    onmouseout="this.style.backgroundColor='white';">
+                    <td>{{ forloop.counter }}.</td>
+                    <td>{{ enc.fechas_examen.fecha_examen }}</td>
+                    <td>{{ enc.lugar_examen }}</td>
+                    <td><a href="detalle/{{ enc.id }}"class="tooltipped" data-position="top" data-delay="10" data-tooltip="Ver encuesta completa de {{ enc.nombres_apellidos }}">{{ enc.nombres_apellidos }}</a></td>
+                    <td>{{ enc.tipo_documento }}</td>
+                    <td>{{ enc.numero_doc }}</td>
+                    <td>{{ enc.edad }}</td>
+                    <td>{{ enc.grado }}</td>
+                    <td align="center">
+                        <a href="editar/{{ enc.id }}" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Editar encuesta">Editar</a>
+                    </td>
+                    <td align="center">
+                        <a href="eliminar/{{ enc.id }}"class="tooltipped" data-position="top" data-delay="10" data-tooltip="Eliminar encuesta">Borrar</a>
+                    </td>
+                </tr>
+                {% endif %}
+                   {% endfor %}
+                {% endfor %}
+              </tbody>
+            </table>
+              </main>
+
+              <div id="modal1" class="modal bottom-sheet">
+                <div class="modal-content">
+                    <div id="ver_impresion_resul"></div>
+                </div>
+              <div class="modal-footer">
+                  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>  
+{% endblock %}
+</body>
+</html>

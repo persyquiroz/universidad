@@ -1,0 +1,96 @@
+
+{% extends "upeu/superior.html" %}
+{% block content %}
+  <main>
+        <div class="section" id="index-banner">
+          <div class="container">
+            <div class="row center">
+              <div class="col s12 m12">
+                  <font size="4"><b>Encuesta de Admisión</b></font>
+               </div>
+            </div>
+          </div>
+        </div>
+        <div class="github-commit">
+                <div class="container">
+                        <div class="commit"><b>Actualizar Encuesta </b> &nbsp;&nbsp;
+                        </div>
+                    </div>
+                    </div>
+
+         <div class="card-panel">
+        <form method="POST" role="form" autocomplete="off">
+           {% csrf_token %}
+        	<div class="row">
+    			<div class="input-field col s12 m6">
+                    <label class="active" for="{{ form.nombres_apellidos.id_for_label }}">Nombres y apellidos</label>
+                        {{form.nombres_apellidos}}
+                </div>
+                <div class="input-field col s12 m3">
+                    <label class="active" for="{{ form.tipo_documento.id_for_label }}">Tipo documento</label>
+                        {{form.tipo_documento}}
+                </div>
+                <div class="input-field col s12 m3">
+                    <label class="active" for="{{ form.numero_doc.id_for_label }}">Número de documento</label>
+                        {{form.numero_doc}}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m2">
+                    <label class="active" for="{{ form.edad.id_for_label }}">Edad (años)</label>
+                        {{form.edad}}
+                </div>
+                <div class="input-field col s12 m4">
+                    <label class="active" for="{{ form.grado.id_for_label }}">Grado de estudios</label>
+                        {{form.grado}}
+                </div>
+                <div class="input-field col s12 m6">
+                    <label class="active" for="{{ form.coleg_acad_igles.id_for_label }}">Colegio/Academia/Iglesia</label>
+                        {{form.coleg_acad_igles}}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m3">
+                    <label class="active" for="{{ form.celular.id_for_label }}">N° de celular</label>
+                        {{form.celular}}
+                </div>
+                <div class="input-field col s12 m5">
+                    <label class="active" for="{{ form.correo.id_for_label }}">Correo elctrónico</label>
+                        {{form.correo}}
+                </div>
+                <div class="input-field col s12 m4">
+                    <label class="active" for="{{ form.modalidad_estudio.id_for_label }}">Modalidad de estudio</label>
+                        {{form.modalidad_estudio}}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m5">
+                    <label class="active" for="{{ form.lugar_examen.id_for_label }}">Lugar de examen</label>
+                        {{form.lugar_examen}}
+                </div>
+                <div class="input-field col s12 m3">
+                    <label class="active" for="{{ form.fechas_examen.id_for_label }}">Fecha de examen</label>
+                        {{form.fechas_examen}}
+                </div>
+                <div class="input-field col s12 m4">
+                    <label class="active" for="{{ form.fecha_hora_registro.id_for_label }}">Fecha hora de registro</label>
+                        {{form.fecha_hora_registro}}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m12">
+      				<input type="submit" value="Actualizar encuesta" class="waves-effect waves-light btn"/>
+					<a href="../../" class="waves-effect waves-light btn">Cancelar</a>
+    			</div>
+    		</div>
+    	</form>
+    </div>
+    </main>
+     {% endblock %}
+</body>
+</html>
+

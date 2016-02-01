@@ -1,0 +1,43 @@
+{% load staticfiles %}
+ <table class="bordered">
+              <tbody>
+              {% for cic in ciclos %}
+              <tr bgcolor="#74DF00">
+                    <td colspan="8">Ciclo: <b>{{ cic.numero }} </b></td>
+                </tr>
+                <tr>
+                    <th>Curso</th>
+                    <th data-tooltip="Créditos" class="tooltipped">Cr</th>
+                    <th data-tooltip="Horas presenciales" class="tooltipped">THP</th>
+                    <th data-tooltip="Horas no presenciales"class="tooltipped">HNP</th> 
+                    <th data-tooltip="Total Horas" class="tooltipped">TH</th>
+                    <th colspan="2"></th>
+                </tr>
+               {% for planc in planes_acad_cursos %}
+                {% if planc.ciclo == cic %}
+				      <tr bgcolor="white"  onmouseover="this.style.backgroundColor='#EAECEE';"
+                    onmouseout="this.style.backgroundColor='white';">
+					          <td>
+                        {{ planc.curso }} {% if planc.pre_requisito %}*{% endif %} 
+                    </td>
+                    <td>{{ planc.creditos }}</td>
+                    <td>{{ planc.thp }}</td>
+                    <td>{{ planc.hnp }}</td>
+                    <td>{{ planc.total_horas }}</td>
+                    <td align="center">
+						          <a class="modal-editar"  href="#modal3" onclick="javascript:editar_plan_curso('{{ planc.id }}',''); void(0);">Editar</a>
+					         </td>
+					         <td align="center">
+						          <a href="javascript:Eliminar_curso('{{ planc.id }}'); void(0);" data-position="top" data-delay="10" data-tooltip="Eliminar">Borrar</a>
+					         </td>
+				        </tr>
+              {% endif %}
+                {% endfor %}
+               {% endfor %}
+               </tbody>
+            </table>
+
+<script type="text/javascript">
+    $('.modal-editar').leanModal();
+</script>
+<script src="{% static "js/init.js" %}"></script>

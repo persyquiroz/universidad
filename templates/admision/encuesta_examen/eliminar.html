@@ -1,0 +1,86 @@
+{% extends "upeu/superior.html" %}
+{% block content %}
+  <main>
+        <div class="section" id="index-banner">
+          <div class="container">
+            <div class="row center">
+              <div class="col s12 m12">
+                  <font size="4"><b>Encuesta de Admisión</b></font>
+               </div>
+            </div>
+          </div>
+        </div>
+        <div class="github-commit">
+                <div class="container">
+                        <div class="commit"><b>Eliminar Encuesta </b> &nbsp;&nbsp;
+                        </div>
+                    </div>
+                    </div>
+
+         <div class="card-panel">
+        <form method="POST" role="form" autocomplete="off">
+           {% csrf_token %}
+        	<div class="row">
+    			<div class="input-field col s12">
+      				<p class="caption">¿Está seguro que desea eliminar la encuesta de <b>{{ object.nombres_apellidos }}?</b></p>
+                    <p>Lugar de examen: <b>{{ object.lugar_examen }}</b></p>
+                    <p>Fecha del examen: <b>{{ object.fechas_examen.fecha_examen }}</b></p>
+    			</div>
+    		</div>
+    		<div class="row">
+    			<div class="input-field col s8">
+      				<input type="submit" value="Eliminar" class="waves-effect waves-light btn"/>
+					<a href="../../" class="waves-effect waves-light btn">Cancelar</a>
+    			</div>
+                <div class="input-field col s4">
+                    <!-- INicio circular -->
+                    <div class="preloader-wrapper small active">
+              <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Fin circular -->
+    		</div>
+    	</form>
+    </div>
+    </main>
+ {% endblock %}
+</body>
+</html>
+

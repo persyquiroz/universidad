@@ -1,0 +1,136 @@
+{% extends "upeu/superior.html" %}
+{% block content %}
+ {% load staticfiles %}
+  <main>
+        <div class="section" id="index-banner">
+          <div class="container">
+            <div class="row center">
+              <div class="col s12 m12">
+                  <font size="4"><b>Registro de alumnos</b></font>
+               </div>
+            </div>
+          </div>
+        </div>
+        <div class="github-commit">
+                <div class="container">
+                        <div class="commit">Nuevo alumno</b> &nbsp;&nbsp;
+
+                            <a class='dropdown-button btn-flat right grey-text text-lighten-5 waves-effect waves-light hide-on-small-only' href='#' data-activates='dropdown1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opciones &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                <ul id='dropdown1' class='dropdown-content'>
+                                <li><a href="agregar/"><i class="material-icons dp8">note_add</i> Nuevo alumno</a></li>
+                                <li><a class="modal-trigger" href="#modal1" onclick="ver_impresion()"><i class="material-icons dp48">print</i> Informe</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+
+         <div class="card-panel">
+        <form method="POST" role="form" autocomplete="off" name="form">
+           {% csrf_token %}
+        	<div class="row">
+    			<div class="input-field col s12 m3">
+      				 <i class="material-icons prefix">account_circle</i>
+                    <label class="active" for="{{ form.nombre.id_for_label }}">Nombre</label>
+                   	{{form.nombre}}
+    			</div>
+                <div class="input-field col s12 m3">
+                    <label class="active" for="{{ form.nombres.id_for_label }}">Nombres</label>
+                        {{form.nombres}}
+                </div>
+                <div class="input-field col s12 m3">
+                    <label class="active" for="{{ form.apepat.id_for_label }}">Apellido paterno</label>
+                        {{form.apepat}}
+                </div>
+                <div class="input-field col s12 m3">
+                    <label class="active" for="{{ form.apemat.id_for_label }}">Apellido materno</label>
+                        {{form.apemat}}
+                </div>
+    		</div>
+            <div class="row">
+                <div class="input-field col s12 m3">
+                    <label class="active" for="{{ form.fecha_nac.id_for_label }}">Fecha de nacimiento</label>
+                    <input id="id_fecha_nac" name="fecha_nac" type="text" value="{{form.fecha_nac.value}}" class="datepicker">
+                        
+                </div>
+                 <div class="input-field col s12 m3">
+                    <label class="active" for="{{ form.sexo.id_for_label }}">Sexo</label>
+                    <input name="sexo" type="radio" id="id_masc" value="M" checked="" class="with-gap"/>
+                        <label for="id_masc">Masculino</label>
+                    <input name="sexo" type="radio" id="id_fem" value="F" class="with-gap"/>
+                        <label for="id_fem">Femenino</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">room</i>
+                    <label class="active" for="{{ form.direccion.id_for_label }}">Dirección actual</label>
+                          {{form.direccion}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m3">
+                     <i class="material-icons prefix">phonelink_ring</i>
+                    <label class="active" for="{{ form.celular.id_for_label }}">Celular</label>
+                         {{form.celular}}
+                </div>
+                <div class="input-field col s12 m9">
+                    <label class="active" for="{{ form.estado.id_for_label }}">Estado</label>
+                    <input name="estado" type="radio" id="activo" value="1" checked="" class="with-gap"/>
+                        <label for="activo">Activo</label>
+                    <input name="estado" type="radio" id="desactivo" value="0" class="with-gap"/>
+                        <label for="desactivo">Desactivo</label>
+                </div>
+            </div>
+    		<div class="row">
+    			<div class="input-field col s12 m12">
+      				<input type="submit" name="opcion" value="Registar" class="waves-effect waves-light btn"/>
+					<a href="../" class="waves-effect waves-light btn">Cancelar</a>
+    			</div>
+    		</div>
+    	</form>
+    </div>
+    </main>
+    <script type="text/javascript">
+        document.form.sexo.value='{{form.sexo.value}}';
+        document.form.estado.value='{{form.estado.value}}';
+        var fecha_nac='{{form.fecha_nac.value}}';
+        var id='{{form.id.value}}';
+        if (fecha_nac =='None')
+        {
+          document.form.fecha_nac.value='';
+        }
+        if (id !='')
+        {
+            document.form.opcion.value='Actualizar';
+        }
+    </script>
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.datepicker').pickadate({
+            monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            weekdaysFull: [ 'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado' ],
+            weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+            today: 'Hoy',
+            clear: 'Limpiar',
+            close: 'Cerrar',
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year
+            format: 'dd/mm/yyyy'    
+         });
+        })
+    </script>
+    <script>if (!window.jQuery) { document.write('<script src="bin/jquery-2.1.1.min.js"><\/script>'); }
+    </script>
+    <script src="{% static "js/jquery.timeago.min.js" %}"></script>
+    <script src="{% static "js/prism.js" %}"></script>
+    <script src="{% static "jade/lunr.min.js" %}"></script>
+    <script src="{% static "jade/search.js" %}"></script>
+    <script src="{% static "bin/materialize.js" %}"></script>
+    <script src="{% static "js/init.js" %}"></script>
+    <!-- Twitter Button -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+          {% endblock %}
+</body>
+</html>
+

@@ -1,0 +1,91 @@
+
+{% extends "upeu/superior.html" %}
+{% block content %}
+  <main>
+        <div class="section" id="index-banner">
+          <div class="container">
+            <div class="row center">
+              <div class="col s12 m12">
+                  <font size="4"><b>Registro de alumnos</b></font>
+               </div>
+            </div>
+          </div>
+        </div>
+        <div class="github-commit">
+                <div class="container">
+                        <div class="commit">Alumnos registrados en el sistema académico</b> &nbsp;&nbsp;
+
+                            <a class='dropdown-button btn-flat right grey-text text-lighten-5 waves-effect waves-light hide-on-small-only' href='#' data-activates='dropdown1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opciones &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                <ul id='dropdown1' class='dropdown-content'>
+                                <li><a href="agregar/"><i class="material-icons dp8">note_add</i> Nuevo alumno</a></li>
+                                <li><a class="modal-trigger" href="#modal1" onclick="ver_impresion()"><i class="material-icons dp48">print</i> Informe</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+        <div class="row">
+          <div class="col s12">
+            <table class="bordered">
+              <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Apellidos y nombres</th>
+                    <th>Código</th>
+                    <th>Fecha Nac</th>
+                    <th>Sexo</th>
+                    <th>Dirección</th>
+                    <th>Celular</th>
+                    <th colspan="2"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for alu in alumnos_uni %}
+				<tr bgcolor="white"  onmouseover="this.style.backgroundColor='#EAECEE';"
+                    onmouseout="this.style.backgroundColor='white';">
+					<td>{{ forloop.counter }}.</td>
+                    <td>{{ alu.alumno.apepat }} {{ alu.alumno.apemat }}, {{ alu.alumno.nombre }} {{ alu.alumno.nombres }}</td>
+					<td>{{ alu.codigo_universitario }}</td>
+                    <td>{{ alu.alumno.fecha_nac|date:"SHORT_DATE_FORMAT" }}</td>
+                    <td>{{ alu.alumno.sexo }}</td>
+                    <td>{{ alu.alumno.direccion }}</td>
+                    <td>{{ alu.alumno.celular }}</td>
+                    <td align="center">
+						<a href="editar/{{ alu.alumno_id }}" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Editar encuesta">Editar</a>
+					</td>
+					<td align="center">
+						<a href="eliminar/{{ alu.alumno_id }}"class="tooltipped" data-position="top" data-delay="10" data-tooltip="Eliminar encuesta">Borrar</a>
+					</td>
+				</tr>
+				{% endfor %}
+              </tbody>
+            </table>
+            <!--<a class="btn" onclick="Materialize.toast('Está dentro de las encuestas', 4000, 'rounded')">Mensaje</a>
+            
+             <iframe id="encoder_iframe" height="200" width="100%" src="impresion/"></iframe>   
+             -->  
+             <!-- Modal Trigger -->
+
+  <div id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+      <div id="ver_impresion_resul"></div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+    </div>
+  </div>
+          
+          </div>
+        </div>
+    </main>
+    <script type="text/javascript">
+            function ver_impresion(){
+                        
+                        $("#ver_impresion_resul").load("ver_impresion/", "", function() {
+                            $("#ver_impresion_resul").show("slow");
+                        });
+                    }
+         </script>
+           {% endblock %}
+</body>
+</html>
+

@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<select id="id_facultad" name="id_facultad" required="">
+	<option value="">Seleccione--</option>
+	{% for fac in list_ent_facultades %}
+	<option value="{{ fac.id }}"> {{ fac.tipo_entidad }} {{ fac.tipo_entidad.conector|upper }} {{ fac.nombre_entidad }}</option>
+	{% endfor %}
+</select>
+
+<script src="{% static "js/init.js" %}"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+           $("#id_facultad").change(function() {
+                var id_facultad = $(this).val();
+                if (id_facultad != '') {
+                    $("#resul_escuela").load("../buscar_escuela/?id_facultad="+id_facultad, "", function() {
+                        $("#resul_escuela").show("slow");
+                    });
+                } else {
+                    $("#resul_escuela").hide("slow");
+                     $("#resul_plan_acad").hide("slow");
+                     $("#resul_plan_acad_cursos").hide("slow");
+                     $("#boton_agregar").hide("slow");  
+                 }
+            });
+        });
+  </script>

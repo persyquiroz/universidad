@@ -1,0 +1,54 @@
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="msapplication-tap-highlight" content="no">
+        <title>Impresión encuestas</title>
+        {% load staticfiles %}
+        <!-- Favicons-->
+        <link rel="apple-touch-icon-precomposed" href="{% static "images/favicon/logo_upeu.png" %}">
+        <meta name="msapplication-TileColor" content="#FFFFFF">
+        <meta name="msapplication-TileImage" content="{% static "images/favicon/logo_upeu.png" %}">
+        <link rel="icon" href="{% static "images/favicon/logo_upeu.png" %}" sizes="32x32">
+        <!-- CSS-->
+        <link href="{% static "css/impresion.css" %}" rel="stylesheet">
+</head>
+    <body bgcolor="white">
+        <center>
+            <h4 onclick="window.print()">REPORTE DE ENCUESTAS DE EXAMEN DE ADMISIÓN</h4>
+        </center>
+            <table class="reporte_impresion" align="center">
+              <thead>
+                <tr>
+                    <th><b>#</b></th>
+                    <th><b>Fecha</b></th>
+                    <th><b>Lugar examen</b></th>
+                    <th><b>Nombres y apellidos</b></th>
+                    <th><b>Tipo doc</b></th>
+                    <th><b>Número doc</b></th>
+                    <th><b>Edad</b></th>
+                    <th><b>Grado</b></th>
+                    <th><b>Modalidad</b></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for enc in encuestas_examen %}
+				<tr bgcolor="white"  onmouseover="this.style.backgroundColor='yellow';"
+                    onmouseout="this.style.backgroundColor='white';">
+					<td nowrap="" align="center">{{ forloop.counter }}</td>
+					<td nowrap="">{{ enc.fechas_examen.fecha_examen }}</td>
+                    <td nowrap="">{{ enc.lugar_examen }}</td>
+                    <td nowrap="">{{ enc.nombres_apellidos }}</td>
+					<td nowrap="" align="center">{{ enc.tipo_documento }}</td>
+                    <td nowrap="">{{ enc.numero_doc }}</td>
+                    <td nowrap="" align="center">{{ enc.edad }}</td>
+                    <td nowrap="">{{ enc.grado }}</td>
+                    <td nowrap="" align="center">{{ enc.modalidad_estudio }}</td>
+                </tr>
+				{% endfor %}
+              </tbody>
+            </table>
+</body>
+</html>

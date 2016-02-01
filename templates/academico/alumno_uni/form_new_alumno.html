@@ -1,0 +1,57 @@
+{% extends "upeu/superior.html" %}
+{% block content %}
+  <main>
+        <div class="section" id="index-banner">
+          <div class="container">
+            <div class="row center">
+              <div class="col s12 m12">
+                  <font size="4"><b>Registro de alumnos</b></font>
+               </div>
+            </div>
+          </div>
+        </div>
+        <div class="github-commit">
+                <div class="container">
+                        <div class="commit"><b>Para terminar...</b> &nbsp;&nbsp;
+
+                            <a class='dropdown-button btn-flat right grey-text text-lighten-5 waves-effect waves-light hide-on-small-only' href='#' data-activates='dropdown1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opciones &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                <ul id='dropdown1' class='dropdown-content'>
+                                <li><a href="agregar/"><i class="material-icons dp8">note_add</i> Nuevo alumno</a></li>
+                                <li><a class="modal-trigger" href="#modal1" onclick="ver_impresion()"><i class="material-icons dp48">print</i> Informe</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+
+    	 <div class="card-panel">
+        <form method="POST" role="form" autocomplete="off" name="form">
+           {% csrf_token %}
+          <div class="row">
+                <div class="input-field col s12 m6">
+                    <label class="active" for="{{ form.codigo_universitario.id_for_label }}">Código universitario</label>
+                         {{form.codigo_universitario}}
+               </div>
+                <div class="input-field col s12 m6">
+                    <label class="active" for="{{ form.estado.id_for_label }}">Estado</label>
+                    <input name="estado" type="radio" id="activo" value="1" checked="" class="with-gap"/>
+                        <label for="activo">Activo</label>
+                    <input name="estado" type="radio" id="desactivo" value="0" class="with-gap"/>
+                        <label for="desactivo">Desactivo</label>
+
+                </div>
+            </div>
+    		<div class="row">
+    			<div class="input-field col s12 m12">
+      				<input type="submit" name="opcion" value="Aceptar" class="waves-effect waves-light btn"/>
+					</div>
+    		</div>
+    	</form>
+    </div>
+    </main>
+    <script type="text/javascript">
+        document.form.estado.value='{{form.estado.value}}';
+    </script>
+           {% endblock %}
+</body>
+</html>
+

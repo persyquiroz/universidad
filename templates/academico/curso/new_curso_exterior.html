@@ -1,0 +1,47 @@
+		<div class="row">
+       		<blockquote><b>Registro de nuevo curso</b></blockquote>
+
+              <div class="input-field col s12 m7">
+                    <label for="nombre_curso_">Nombre del curso</label>
+                    <input type="text" name="nombre_curso_" value=""  maxlength="120" id="nombre_curso_" required=""/>
+               </div>
+               <div class="input-field col s12 m5">
+                    <label for="abreviatura">Abreviatura</label>
+                    <input type="text" name="abreviatura" value=""  maxlength="120" id="abreviatura"/>
+               </div>
+            </div>
+           <div class="row">
+               <div class="input-field col s12 m4">
+                    <label class="active" for="area">Área</label>
+                    <select id="area" name="area" required="">
+                      <option value="">Seleccione--</option>
+                      {% for are in lista_areas %}
+                    <option value="{{ are.id }}">{{ are.nombre_area }}</option>
+                      {% endfor %}
+                    </select>
+                </div>
+                <div class="input-field col s12 m8">
+                		<a class="waves-effect waves-light btn green" id="guardar_curso">Registrar</a>
+               			<a href="javascript:cancelar_curso(); void(0);" class="waves-effect waves-light btn brown">Cerrar</a>
+               	</div>
+              </div>
+            <div class="row">
+                <div id="guardar_curso_resul"></div>
+             </div>
+          </div>
+
+       <script type="text/javascript">
+        $(document).ready(function() {
+           $("#guardar_curso").click(function() {
+            var nombre_curso = $("#nombre_curso_").val();
+            var area = $("#area").val();
+            var abreviatura = $("#abreviatura").val();
+            
+             $("#guardar_curso_resul").load("../guardar_curso/", "nombre_curso="+nombre_curso+"&area="+area+"&abreviatura="+abreviatura, function() {
+                   $("#guardar_curso_resul").show("slow");
+              	});
+         	});
+      	});
+		</script>
+ {% load staticfiles %}
+<script src="{% static "js/init.js" %}"></script>

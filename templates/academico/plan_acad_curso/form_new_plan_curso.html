@@ -1,0 +1,153 @@
+      {% for plan in plan_academico %}
+      <div class="card-panel">
+    <form method="POST" role="form" name="plan_acad_curso" autocomplete="off" action="#">
+           {% csrf_token %}
+           <input type="hidden" name="curso"/>
+           <input type="hidden" name="plan_academico" value="{{ plan.id }}"/>
+           <input type="hidden" name="estado" value="1"/>
+           <input type="hidden" name="pre_requisito"/>
+           <div class="row">
+              <a href="javascript:void(0);" title="Anadir curso" id="nuevo__curso" class="btn-floating blue">
+                    <i class="large mdi-action-description"></i>
+              </a>
+              <div id="nuevo_curso_resul"></div>
+          </div>
+
+          <div class="row">
+           <blockquote>
+                Registrar curso en el plan académico: <b>{{ plan.numero_plan }}</b><br>
+                {{ plan.entidad_academica.tipo_entidad.tipo_entidad }} {{ plan.entidad_academica.tipo_entidad.conector|upper }} <b>{{ plan.entidad_academica.nombre_entidad }}</b>
+            </blockquote>
+              <div id="guardar_plan_curso_resul"></div>
+              <div class="progress" id="cargando_form" style="display: none;">
+                  <div class="indeterminate"></div>
+              </div>
+               <div class="input-field col s12 m3">
+                    <label class="active" for="id_ciclo">Ciclo</label>
+                    <select id="id_ciclo" name="ciclo" required="">
+                      <option value="">Seleccione--</option>
+                      {% for cic in lista_ciclos %}
+                    <option value="{{ cic.id }}">{{ cic.numero }}</option>
+                      {% endfor %}
+                    </select>
+                </div>
+                <div class="input-field col s12 m9">
+                    <label class="active" for="buscar_curso">Curso</label>
+                    <input type="text" name="nombre_curso" value=""  maxlength="120" id="buscar_curso" required=""/>
+                    <div id="buscar_curso_resul"></div>      
+                 </div>
+            </div>
+           <div class="row">
+                <div class="input-field col s12 m4">
+                    <label class="active" for="id_creditos">CRÉDITOS</label>
+                    <input type="number" name="creditos" value="" id="id_creditos" max="50" min="1" maxlength="2" required=""/>
+                   
+                </div>
+                <div class="input-field col s12 m4">
+                    <label class="active" for="id_thp">THP</label>
+                    <input type="number" id="id_thp" name="thp" value="" max="50" min="1" maxlength="2" required=""/>
+                </div>
+                 <div class="input-field col s12 m4">
+                    <label class="active" for="id_hnp">HNP</label>
+                    <input type="number" name="hnp" value="" id="id_hnp" max="50" min="1" maxlength="2" required=""/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m8">
+                    <label class="active" for="buscar_pre_requisito">Curso pre-requisito</label>
+                    <input type="text" name="curso_pre_requisito" id="buscar_pre_requisito" maxlength="100"/>
+                    <div id="buscar_pre_requisito_resul"></div>
+                </div>
+                <div class="input-field col s12 m4">
+                     <!--<input type="submit" class="waves-effect waves-light btn green" value="Registrar"/> -->
+                       <a href="javascript:void(0);" class="waves-effect waves-light btn green" id="guardar_plan_curso">Registrar</a>
+                </div>
+            </div>
+       </form>
+       </div>
+
+      {% endfor %}
+     
+     <script type="text/javascript">
+        $(document).ready(function() {
+           $("#buscar_curso").keyup(function() {
+                var buscar = $(this).val();
+                var plan_academico = document.plan_acad_curso.plan_academico.value;
+                if (buscar != '') {
+                    $("#buscar_curso_resul").load("../buscar_curso_plan/", "buscar="+buscar+"&plan_academico="+plan_academico, function() {
+                        $("#buscar_curso_resul").show("slow");
+                    });
+                } else {
+                    $("#buscar_curso_resul").hide("slow");
+                    document.plan_acad_curso.curso.value="";
+                  }
+            });
+
+           $("#buscar_pre_requisito").keyup(function() {
+                var buscar = $(this).val();
+                 var plan_academico = document.plan_acad_curso.plan_academico.value;
+                 var ciclo = document.plan_acad_curso.ciclo.value;
+                if (buscar != '' && ciclo != '') {
+                    $("#buscar_pre_requisito_resul").load("../buscar_pre_requisito/", "buscar="+buscar+"&id_plan_academico="+plan_academico+"&ciclo="+ciclo, function() {
+                        $("#buscar_pre_requisito_resul").show("slow");
+                    });
+                } else {
+                    $("#buscar_pre_requisito_resul").hide("slow");
+                    document.plan_acad_curso.pre_requisito.value="";
+                  }
+            });
+
+            $("#nuevo__curso").click(function() {
+                $("#nuevo_curso_resul").load("../nuevo_curso/", "", function() {
+                        $("#nuevo_curso_resul").show("slow");
+                    });
+            });
+
+            $("#guardar_plan_curso").click(function() {
+                
+                var plan_academico = document.plan_acad_curso.plan_academico.value;
+                var ciclo = document.plan_acad_curso.ciclo.value;
+                var curso = document.plan_acad_curso.curso.value;
+                var creditos = document.plan_acad_curso.creditos.value;
+                var thp = document.plan_acad_curso.thp.value;
+                var hnp = document.plan_acad_curso.hnp.value;
+                var pre_requisito = document.plan_acad_curso.pre_requisito.value;
+                
+                if (ciclo != '') {
+                     $("#cargando_form").show("slow");
+                    $("#guardar_plan_curso_resul").load("../agregar_plan_acad_curso/", "plan_academico="+plan_academico+"&ciclo="+ciclo+"&curso="+curso+"&creditos="+creditos+"&thp="+thp+"&hnp="+hnp+"&pre_requisito="+pre_requisito, function() {
+                        $("#cargando_form").hide("slow");
+                        $("#guardar_plan_curso_resul").show("slow");
+
+                          $("#resul_plan_acad_cursos").load("../buscar_plan_acad_cursos/?id_plan_academico="+plan_academico, "", function() {
+                              $("#resul_plan_acad_cursos").show("slow");      
+                            });
+                    });
+                } else {
+                    $("#guardar_plan_curso_resul").hide("slow");
+                  }
+            });
+        });
+        function Seleccionar_curso(curso, nombre_curso) {
+              window.document.plan_acad_curso.curso.value = curso;
+              window.document.plan_acad_curso.nombre_curso.value = nombre_curso;
+              $("#result,#buscar_curso_resul").hide("slow");
+
+              var obj = document.plan_acad_curso.creditos;
+                  obj.focus();
+              if (obj.value != "") {
+                    obj.value += "";
+                  }
+              }
+        function Seleccionar_pre_curso(pre_requisito, curso_pre_requisito) {
+              window.document.plan_acad_curso.pre_requisito.value = pre_requisito;
+              window.document.plan_acad_curso.curso_pre_requisito.value = curso_pre_requisito;
+              $("#result,#buscar_pre_requisito_resul").hide("slow");
+            }
+         function cancelar_curso() {
+              $("#result,#nuevo_curso_resul").hide("slow");
+            }
+    </script>
+    
+  {% load staticfiles %}
+<script src="{% static "js/init.js" %}"></script>

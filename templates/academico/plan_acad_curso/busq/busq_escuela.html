@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<select id="id_escuela" name="id_escuela" required="">
+	<option value="">Seleccione--</option>
+	{% for esc in list_ent_escuelas %}
+	<option value="{{ esc.id }}"> {{ esc.tipo_entidad.abreviatura }} {{ esc.tipo_entidad.conector|upper }} {{ esc.nombre_entidad }}</option>
+	{% endfor %}
+</select>
+<script src="{% static "js/init.js" %}"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+           $("#id_escuela").change(function() {
+                var id_escuela = $(this).val();
+                if (id_escuela != '') {
+                    $("#resul_plan_acad").load("../buscar_plan_acad/?id_escuela="+id_escuela, "", function() {
+                        $("#resul_plan_acad").show("slow");
+                    });
+                } else {
+                    $("#resul_plan_acad").hide("slow");
+                    $("#resul_plan_acad_cursos").hide("slow");
+                    $("#boton_agregar").hide("slow");  
+                 }
+            });
+        });
+  </script>
+

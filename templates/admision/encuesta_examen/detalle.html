@@ -1,0 +1,63 @@
+
+{% extends "upeu/superior.html" %}
+{% block content %}
+  <main>
+        <div class="section" id="index-banner">
+          <div class="container">
+            <div class="row center">
+              <div class="col s12 m12">
+                  <font size="4"><b>Detalle de la encuesta de admisión</b></font>
+               </div>
+            </div>
+          </div>
+        </div>
+        <div class="github-commit">
+                <div class="container">
+                        <div class="commit">De: <b>{{ encuesta.nombres_apellidos }} </b> &nbsp;&nbsp;
+
+                            <a class='dropdown-button btn-flat right grey-text text-lighten-5 waves-effect waves-light hide-on-small-only' href='#' data-activates='dropdown1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opciones &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                <ul id='dropdown1' class='dropdown-content'>
+                                    <li><a href="../../">Ver lista</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="../../editar/{{ encuesta.id }}">Editar</a></li>
+                                    <li><a href="../../eliminar/{{ encuesta.id }}">Eliminar</a></li>
+                                </ul>
+                        </div>
+                    </div>
+                    </div>
+
+    	   <div class="row">
+           <div class="col s12">
+                <ul class="collection">
+                    <li class="collection-item">Nombres y apellidos: <b>{{ encuesta.nombres_apellidos }}</b></li>
+                    <li class="collection-item">{{ encuesta.tipo_documento }}: <b>{{ encuesta.numero_doc }}</b></li>
+                    <li class="collection-item">Edad: <b>{{ encuesta.edad }}</b></li>
+                    <li class="collection-item">Grado de estudios: <b>{{ encuesta.grado }}</b></li>
+                    <li class="collection-item">Colegio/academica/iglesia: <b>{{ encuesta.coleg_acad_igles }}</b></li>
+                    <li class="collection-item">Celular: <b>{{ encuesta.celular }}</b></li>
+                    <li class="collection-item">Correo: <b>{{ encuesta.correo }}</b></li>
+                    <li class="collection-item">Modalidad de estudios: <b>{{ encuesta.modalidad_estudio }}</b></li>
+                    <li class="collection-item">Lugar de examen: <b>{{ encuesta.lugar_examen }}</b></li>
+                    <li class="collection-item">Fecha de examen: <b>{{ encuesta.fechas_examen.fecha_examen|date:"D d M Y" }}</b></li>
+                    <li class="collection-item">Fecha registro: <em>{{ encuesta.fecha_hora_registro|date:"D d M Y" }} ({{ encuesta.fecha_hora_registro|date:"SHORT_DATE_FORMAT" }})</em></li>
+                    <li class="collection-item">Hora registro: <em>{{ encuesta.fecha_hora_registro|time }}</em></li>
+                </ul>
+                <a href="../../" class="waves-effect waves-light btn">Volver</a>
+              </div>
+          </div>
+    </main>
+    <!--  Scripts-->
+    {% if messages %}
+            {% for message in messages %}
+        <script type="text/javascript">
+        $(document).ready(function() {
+                        var $toastContent = $('<span>{{ message }}</span>');
+                            Materialize.toast($toastContent, 3000);
+                    })
+        </script>
+        {% endfor %}
+        {% endif %}
+     {% endblock %}
+</body>
+</html>
+

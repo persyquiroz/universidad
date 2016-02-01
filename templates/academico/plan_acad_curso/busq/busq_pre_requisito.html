@@ -1,0 +1,5 @@
+<div class="collection">
+	{% for pre in planes_acad_cursos %}
+    <a href="javascript:void(0);" class="collection-item"  onclick="Seleccionar_pre_curso('{{ pre.id }}','{{ pre.curso }}');">{{ pre.curso }}<span class="badge"><font size="1">Ciclo: {{ pre.ciclo }}</font></span></a>
+    {% endfor %}
+</div>
